@@ -40,6 +40,20 @@ describe('filterActiveUsers', () => {
         const filteredUsers = filterActiveUsers(users);
         expect(filteredUsers).toStrictEqual([]);
     });
+    it('returns empty array when given single user and they are inactive',()=>{
+        const users = [
+            { name: 'test1', isActive: false },
+        ];
+        const filteredUsers = filterActiveUsers(users);
+        expect(filteredUsers).toStrictEqual([]);
+    })
+    it('returns array with single active user when given only one user and they are active',()=>{
+        const users = [
+            {name:'test1',isActive:true}
+        ]
+        const filteredUsers=filterActiveUsers(users)
+        expect(filteredUsers).toStrictEqual(users);
+    })
     it('handles empty array gracefully', () => {
         expect(filterActiveUsers([])).toStrictEqual([]);
     });
@@ -72,7 +86,7 @@ describe('logAction', () => {
         const log = logAction(null,null);
         expect(log).toBe('User null performed null at 2026-06-10T00:00:00.000Z');
     });
-    it('handles empty strings gracefuly', () => {
+    it('handles empty strings gracefully', () => {
         const log = logAction('', '');
         expect(log).toBe('User  performed  at 2026-06-10T00:00:00.000Z');
     });
